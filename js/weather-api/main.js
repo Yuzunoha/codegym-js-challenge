@@ -12,13 +12,30 @@ const main = () => {
     // url取得関数
     const urlBuilder = (city) => `${baseURL}?lang=ja&q=${city}&appid=${APPID}`;
 
-    // 更新関数
-    const disp = (city) => {
-        // fetch(url)
+    // 画面更新
+    const disp = (temp, humidity, pressure, description) => {
+       p_temp.textContent = temp;
+       p_humidity.textContent = humidity;
+       p_pressure.textContent = pressure;
+       p_description.textContent = description;
+    };
+
+    // fetchを実行する関数
+    const update = (city) => {
+        const url = urlBuilder(city);
+        fetch(url)
+            .then(response => response.json())
+            .then(json => {
+                const temp = json['main']['temp'];
+                const humidity = json['main']['humidity'];
+                const pressure = json['main']['pressure'];
+                const description = json['weather'][0]['description'];
+                disp(temp, humidity, pressure, description);
+            });
     };
 
     // 画面読み込み時の処理
-    p(urlBuilder('Tokyo'));
+    update('London');
 
     // 都市変更時の処理
     select_city.addEventListener('change', (event) => {
