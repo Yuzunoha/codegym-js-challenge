@@ -10,7 +10,7 @@ const main = () => {
     const p_description = document.getElementById('p_description');
 
     // url取得関数
-    const urlBuilder = (city) => `${baseURL}?lang=ja&q=${city}&appid=${APPID}`;
+    const urlBuilder = (city) => `${baseURL}?lang=ja&units=metric&q=${city}&appid=${APPID}`;
 
     // 画面更新
     const disp = (temp, humidity, pressure, description) => {
@@ -26,9 +26,9 @@ const main = () => {
         fetch(url)
             .then(response => response.json())
             .then(json => {
-                const temp = json['main']['temp'];
-                const humidity = json['main']['humidity'];
-                const pressure = json['main']['pressure'];
+                const temp = json['main']['temp'] + ' ℃';
+                const humidity = json['main']['humidity'] + ' %';
+                const pressure = json['main']['pressure'] + ' hPa';
                 const description = json['weather'][0]['description'];
                 disp(temp, humidity, pressure, description);
             });
@@ -39,11 +39,8 @@ const main = () => {
 
     // 都市変更時の処理
     select_city.addEventListener('change', (event) => {
-       p('変更された', event.currentTarget.value);
-       p_temp.textContent = '気温';
-       p_humidity.textContent = '湿度';
-       p_pressure.textContent = '気圧';
-       p_description.textContent = '天気';
+        const city = event.currentTarget.value;
+        update(city);
     });
 };
 
