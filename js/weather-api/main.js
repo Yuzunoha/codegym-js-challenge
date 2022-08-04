@@ -1,4 +1,7 @@
 const main = () => {
+    const baseURL = 'https://api.openweathermap.org/data/2.5/weather';
+    const APPID = '4b5774e9f3d2a07b84f0f2f88e486224';
+
     const p = console.log;
     const select_city = document.getElementById('select_city');
     const p_temp = document.getElementById('p_temp');
@@ -6,6 +9,18 @@ const main = () => {
     const p_pressure = document.getElementById('p_pressure');
     const p_description = document.getElementById('p_description');
 
+    // url取得関数
+    const urlBuilder = (city) => `${baseURL}?lang=ja&q=${city}&appid=${APPID}`;
+
+    // 更新関数
+    const disp = (city) => {
+        // fetch(url)
+    };
+
+    // 画面読み込み時の処理
+    p(urlBuilder('Tokyo'));
+
+    // 都市変更時の処理
     select_city.addEventListener('change', (event) => {
        p('変更された', event.currentTarget.value);
        p_temp.textContent = '気温';
