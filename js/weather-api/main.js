@@ -1,9 +1,21 @@
-const p = console.log;
+const main = () => {
+    const p = console.log;
+    const select_city = document.getElementById('select_city');
+    const p_temp = document.getElementById('p_temp');
+    const p_humidity = document.getElementById('p_humidity');
+    const p_pressure = document.getElementById('p_pressure');
+    const p_description = document.getElementById('p_description');
 
-const select_city = document.getElementById('select_city');
-select_city.addEventListener('change', (event) => {
-   p('変更された', event.currentTarget.value);
-});
+    select_city.addEventListener('change', (event) => {
+       p('変更された', event.currentTarget.value);
+       p_temp.textContent = '気温';
+       p_humidity.textContent = '湿度';
+       p_pressure.textContent = '気圧';
+       p_description.textContent = '天気';
+    });
+};
+
+document.addEventListener('DOMContentLoaded', main);
 
 /*
 https://api.openweathermap.org/data/2.5/weather?lang=ja&q=London&appid=4b5774e9f3d2a07b84f0f2f88e486224
